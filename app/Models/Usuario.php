@@ -13,6 +13,16 @@ class Usuario extends Authenticatable
     use HasFactory, Notifiable;
 
     /**
+     * Obtem o nome do atributo de password para o usuário.
+     * Este método sobreescreve o métdodo getAuthPasswordName() da Classe Authenticatable
+     * @return string
+     */
+    public function getAuthPasswordName()
+    {
+        return $this->senha;
+    }
+
+    /**
      * Os atributos do Model que são atribuíveis em massa.
      *
      * @var list<string>
