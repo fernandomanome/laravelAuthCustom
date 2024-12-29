@@ -17,7 +17,7 @@ class Usuario extends Authenticatable
      * Este método sobreescreve o métdodo getAuthPasswordName() da Classe Authenticatable
      * @return string
      */
-    public function getAuthPasswordName()
+    public function getAuthPassword()
     {
         return $this->senha;
     }
