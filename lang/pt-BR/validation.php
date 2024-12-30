@@ -161,6 +161,7 @@ return [
     'url' => 'O campo :attribute deve ser uma URL válida.',
     'ulid' => 'O campo :attribute deve ser um ULID válido.',
     'uuid' => 'O campo :attribute deve ser um UUID válido.',
+    'invalid_account' => 'A conta :attribute não está registrada ou está inativa.',
 
     /*
     |--------------------------------------------------------------------------

@@ -48,11 +48,12 @@ class ForgotPasswordController extends Controller
 				'email',
 				function ($attribute, $value, $fail) use (&$user) {
 					// Verifica se o email está registrado e se o usuário está ativo
-					$user = Usuario::where('email', $value)->where('ativo', true)->first();
+					$user = Usuario::where('email', $value)->first();
 
 					// Se o usuário não for encontrado ou estiver inativo, cria a falha da validação.
 					if (!$user) {
-						$fail('O email fornecido não está registrado ou está inativo.');
+						// Utiliza a chave de tradução para exibir a mensagem de erro
+						$fail(__('validation.invalid_account', ['attribute' => $value]));
 					}
 				},
 			],
@@ -61,6 +62,7 @@ class ForgotPasswordController extends Controller
 		// Retorna o usuário ou null em caso de falha.
 		return $user;
 	}
+
 
 
 	/**
@@ -72,7 +74,7 @@ class ForgotPasswordController extends Controller
 	public function sendResetLinkEmail(Request $request)
 	{
 		// Inicializa a resposta
-		$response = "passwords.invalid";
+		$response = __('validation.invalid_account', ['attribute' => $request->email]);
 
 		// Valida o email da requisição
 		$user = $this->validateEmailCustomForgot($request);
