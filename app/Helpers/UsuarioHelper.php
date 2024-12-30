@@ -47,6 +47,6 @@ class UsuarioHelper
 	{
 		// Regras da validação do cadastro
 		// Atualmente só verifica se está ativo
-		return isset($user->ativo) && $user->ativo === true;
+		return isset($user->ativo) && $user->ativo;
 	}
 }
