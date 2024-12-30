@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nome_completo')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->boolean('active')->default(false);
+            $table->boolean('ativo')->default(true);
             $table->string('senha');
             $table->rememberToken();
             $table->timestamps();
