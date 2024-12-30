@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 class UsuarioHelper
 {
     /**
-     * Verifica se o usuário está ativo e, caso contrário, realiza o logout.
+     * Verifica se o cadastro do usuário atende as características, caso contrário, realiza o logout.
      *
      * @param  \Illuminate\Http\Request  $request  A requisição HTTP.
      * @param  mixed  $user  O usuário autenticado.
