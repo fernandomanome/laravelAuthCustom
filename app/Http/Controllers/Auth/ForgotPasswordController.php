@@ -26,12 +26,18 @@ class ForgotPasswordController extends Controller
 	use SendsPasswordResetEmails;
 
 	/**
-	 * Valida o email da requisição, verificando se o email existe na tabela 'usuarios' 
-	 * e se o usuário está ativo. Caso o email seja válido, retorna o usuário, 
-	 * caso contrário, valida e retorna uma mensagem de erro.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @return mixed Retorna o usuário se válido, ou uma falha na validação do email.
+	 * Substitui o método `validateEmail()` da Trait `SendsPasswordResetEmails`, utilizado no processo de envio de redefinição de senha.
+	 * 
+	 * Este método valida o email fornecido na requisição, verificando se ele existe na tabela `usuarios` e se o usuário está ativo.
+	 * Caso o email seja válido, o usuário é retornado. Caso contrário, uma mensagem de erro é gerada, indicando que o email não está registrado ou está inativo.
+	 * 
+	 * @param  \Illuminate\Http\Request  $request  A requisição HTTP contendo o email a ser validado.
+	 * @return mixed Retorna o usuário caso o email seja válido e o usuário esteja ativo; ou, em caso de falha, retorna uma mensagem de erro.
+	 * 
+	 * @see \Illuminate\Foundation\Auth\SendsPasswordResetEmails::sendResetLinkEmail
+	 * @version 1.0
+	 * @author Fernando
+	 * @access private
 	 */
 	protected function validateEmailCustomForgot(Request $request)
 	{
@@ -63,13 +69,18 @@ class ForgotPasswordController extends Controller
 		return $user;
 	}
 
-
-
 	/**
+	 * **[!ATENÇÃO!]** Este método pertence à Trait `AuthenticatesUsers` e está sendo sobrescrito 
+	 * para permitir a execução das validações customizadas a partir do método `validateEmailCustomForgot()`
 	 * Envia um link para redefinição de senha para o usuário.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
+	 *
+	 * @see \Illuminate\Foundation\Auth\SendsPasswordResetEmails::sendResetLinkEmail
+	 * @version 1.0
+	 * @author Fernando
+	 * @access private
 	 */
 	public function sendResetLinkEmail(Request $request)
 	{

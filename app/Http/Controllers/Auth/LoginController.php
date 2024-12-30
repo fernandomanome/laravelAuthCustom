@@ -45,19 +45,23 @@ class LoginController extends Controller
     /**
      * Método executado após a autenticação bem-sucedida do usuário com email e senha.
      * 
-     * [!ATENÇÃO!] Este método pertence à Trait `AuthenticatesUsers` e está sendo sobrescrito 
+     * **[!ATENÇÃO!]** Este método pertence à Trait `AuthenticatesUsers` e está sendo sobrescrito 
      * para permitir a execução de validações adicionais durante o processo de login,
      * como verificações extras de permissões ou condições específicas do usuário.
      * O objetivo é fornecer um controle mais detalhado sobre o fluxo pós-login,
      * garantindo que o cadastro do usuário atenda a requisitos adicionais antes de prosseguir.
-     * 
      * @param  \Illuminate\Http\Request  $request  A requisição HTTP com dados do login.
      * @param  mixed  $user  O usuário autenticado, que pode ser um modelo de usuário ou instância personalizada.
      * @return \Illuminate\Http\RedirectResponse  O redirecionamento após validações.
+     * 
+     * @see AuthenticatesUsers
+     * @version 1.0
+     * @author Fernando
+     * @access private
      */
     protected function authenticated(Request $request, $user)
     {
-        // Realiza validações adicionais do cadastro do usuário        
+        // Realiza validações adicionais do cadastro do usuário
 		if(!UsuarioHelper::validarCadastroUsuario($request, $user)) {
 			// Se não for válido redireciona o usuário
 			return redirect()->route('login')->withErrors(['email' => __('validation.invalid_account', ['attribute' => $user->email])]);
