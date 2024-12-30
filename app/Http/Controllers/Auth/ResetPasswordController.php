@@ -24,7 +24,7 @@ class ResetPasswordController extends Controller
     /**
      * Atualiza a senha do usuário na tabela 'usuarios'.
      * 
-     * Este método substitui o comportamento padrão do método `setUserPassword()` 
+     * **[!ATENÇÃO!]** Este método substitui o comportamento padrão do método `setUserPassword()` 
      * da trait `ResetsPasswords`, garantindo que a senha do usuário seja 
      * salva no campo `senha` em vez de `password`, que não existe na tabela 
      * `usuarios`. O método aplica o algoritmo de hash para garantir que a 
