@@ -60,7 +60,7 @@ class LoginController extends Controller
         // Realiza validações adicionais do cadastro do usuário        
 		if(!UsuarioHelper::validarCadastroUsuario($request, $user)) {
 			// Se não for válido redireciona o usuário
-			return redirect()->route('login')->withErrors(['email' => 'Sua conta não está ativa.']);
+			return redirect()->route('login')->withErrors(['email' => __('validation.invalid_account', ['attribute' => $user->email])]);
 		}
         // Se o usuário estiver ativo, continua o fluxo de login
         return redirect()->intended($this->redirectTo);
