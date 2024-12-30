@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Helpers\UsuarioHelper;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -57,33 +58,11 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         // Realiza validações adicionais do cadastro do usuário        
-		if(!$this->validarAcessoUsuario($request, $user)) {
+		if(!UsuarioHelper::validarCadastroUsuario($request, $user)) {
 			// Se não for válido redireciona o usuário
 			return redirect()->route('login')->withErrors(['email' => 'Sua conta não está ativa.']);
 		}
         // Se o usuário estiver ativo, continua o fluxo de login
         return redirect()->intended($this->redirectTo);
-    }
-
-    /**
-     * Método responsável por aplicar validações adicionais após a autenticação do usuário,
-     * verificando condições específicas antes de permitir o acesso ao sistema.
-     * 
-     * @param  \Illuminate\Http\Request  $request  A requisição HTTP com os dados do login.
-     * @param  mixed  $user  O usuário autenticado.
-     * @return bool Retorna se o cadastro está válido ou não.
-     */
-    private function validarAcessoUsuario(Request $request, $user) :bool
-    {
-		$cadastroUsuarioValido = isset($user->ativo) && $user->ativo ? true : false;
-
-        if (!$cadastroUsuarioValido) {
-            // Se o cadastro do usuário não atender aos requisitos, ele será desconectado e a sessão será invalidada
-            Auth::logout();
-            $request->session()->invalidate();
-			// Gera um novo token CSRF por segurança.
-            $request->session()->regenerateToken();
-        }
-		return $cadastroUsuarioValido;
     }
 }
