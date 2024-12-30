@@ -57,7 +57,7 @@ class LoginController extends Controller
      * @see AuthenticatesUsers
      * @version 1.0
      * @author Fernando
-     * @access private
+     * @access protected
      */
     protected function authenticated(Request $request, $user)
     {

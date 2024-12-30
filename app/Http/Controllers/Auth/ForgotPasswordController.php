@@ -37,7 +37,7 @@ class ForgotPasswordController extends Controller
 	 * @see \Illuminate\Foundation\Auth\SendsPasswordResetEmails::sendResetLinkEmail
 	 * @version 1.0
 	 * @author Fernando
-	 * @access private
+	 * @access protected
 	 */
 	protected function validateEmailCustomForgot(Request $request)
 	{
@@ -80,7 +80,7 @@ class ForgotPasswordController extends Controller
 	 * @see \Illuminate\Foundation\Auth\SendsPasswordResetEmails::sendResetLinkEmail
 	 * @version 1.0
 	 * @author Fernando
-	 * @access private
+	 * @access public
 	 */
 	public function sendResetLinkEmail(Request $request)
 	{
